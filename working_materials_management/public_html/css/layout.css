@@ -1,0 +1,57 @@
+body {
+	background-color: #edffd4;
+}
+
+/* ----------container zentriert das layout-------------- */
+#container {
+	width: 800px;
+	margin-bottom: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #FFFFFF;
+	border: solid 4px #88ba3d;
+	border-radius: 5px;
+}
+
+/* ----------banner for logo-------------- */
+#banner {
+	text-align: right;
+	padding: 0px;
+	margin: 0px;
+}
+#banner img {
+	padding:10px 0px;
+} 
+
+/* -----------------Inhalt--------------------- */
+#content {
+	width: 556px;
+	padding: 10px;
+	margin-left: 0px;
+	margin-right: 200px;
+	background-color: #f9f9f9
+}
+div#content { 
+	min-height:600px;
+	height:expression(this.scrollHeight > 600 ? "auto":"600px"); 
+}
+
+/* --------------right navigavtion------------- */
+#right {
+	float: right;
+	padding: 10px;
+	width: 200px;
+	max-width: 200px;
+	border-left: solid 4px #88ba3d;
+	min-height:600px;
+	background-color: #f9f9f9
+}
+
+/* -----------footer--------------------------- */
+#footer {
+	clear: both;
+	margin: 0px;
+	padding: 0px;
+	text-align: right;
+	background-color: #88ba3d; 
+}

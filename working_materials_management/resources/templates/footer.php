@@ -1,0 +1,1 @@
+&copy; 2011 | <a href="impressum">Impressum</a>
