@@ -19,7 +19,10 @@
 	<class style="color: #ffa500">n</class>
 </h1>    
 <ul id="menu">
-	<li><a href="index.php" class="current">Home</a></li>  
-	<li><a href="#">Articles</a></li>  
-	<li><a href="#">Portfolio</a></li>  
+	<?php
+		foreach ($menu as $entry) {
+		  echo "<li><a href=\"" . $entry["url"] . "\" class=\"" . $entry["class"] . "\">" . $entry["text"] . "</a></li>";  
+		}
+		
+	?>
 </ul>  
