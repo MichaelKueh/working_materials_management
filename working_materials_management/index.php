@@ -1,6 +1,15 @@
 <?php  
     // load up your config file  
-    require_once("resources/config.php");    
+    require_once("resources/config.php");  
+    
+    if(!isset($_GET['action']))
+    {
+    	$action = "content";
+    }
+    else
+    {
+    	$action = $_GET['action'];
+    }
 ?>
 
 
@@ -21,7 +30,7 @@
 				<?php require_once(TEMPLATES_PATH . "/right.php"); ?>
 			</div>
 			<div id="content">
-				<?php require_once(TEMPLATES_PATH . "/content.php"); ?>
+				<?php require_once(TEMPLATES_PATH . "/" . $action . ".php"); ?>
 			</div>
 			<div id="footer">
 				<?php require_once(TEMPLATES_PATH . "/footer.php"); ?>
