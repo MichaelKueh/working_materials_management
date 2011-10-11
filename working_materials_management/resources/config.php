@@ -1,9 +1,9 @@
 <?php
 	$config = array(  
 	    "db" => array(    
-	        "dbname" => "database2",  
-	        "username" => "dbUser",  
-	        "password" => "pa$$",  
+	        "dbname" => "wmm",  
+	        "username" => "root",  
+	        "password" => "",  
 	        "host" => "localhost"  
 	    ),  
 	    "urls" => array(  

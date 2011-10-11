@@ -1,1 +1,1 @@
-&copy; 2011 | <a href="impressum">Impressum</a>
+&copy; 2011 | <a href="index.php?action=impressum">Impressum</a>

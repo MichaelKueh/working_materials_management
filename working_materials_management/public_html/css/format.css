@@ -75,6 +75,15 @@ div#right {
 	font-size: small;
 }
 
+div#right input{
+	margin-top: 5px;
+}
+
+div#right p.error {
+	font-size: x-small;
+	color: red;
+}
+
 /* ---------- content -------------- */
 div#content h1 {
 	font-size: 14px;
