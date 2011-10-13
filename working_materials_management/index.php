@@ -6,51 +6,69 @@
     require_once("resources/database.php");        
     
     // start session
-    session_start();
+   	session_start();
     
-    // session handling
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-		$key = $_POST['login_key'];
-		$class = getClassByKey($key);
-		
-		if ( isset($class) ) {
-			$_SESSION['login'] = $class;
-		} else {
-			$wrongLogin = true;
-		}
+    // session handlin
+    if( !isset($_SESSION['login']) )
+    {
+	    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	
+			$key = $_POST['login_key'];
+			$class = getClassByKey($key);
+			
+			if ( isset($class) ) {
+				$_SESSION['classId'] = getClassIdByKey($key);
+				$_SESSION['login'] = $class;
+			} else {
+				$wrongLogin = true;
+			}
+	    }
     }
     
     // define content
-    $content = "content.php";
     if( isset($_GET["action"]) ) {
- 		switch($_GET["action"]) {
-	    	case "class":
-	    		$content = "class.php";
-	    		break;
-	    	case "impressum":
-	    		$content = "impressum.php";
-	    		break;
-	    	case "logout":
-	    		session_destroy();
-	    		unset($_SESSION['login']);
-	    		break;
-	    }
+    	$content = $_GET["action"] . ".php";
+    }
+    else {
+    	$content = "content.php";
+    }
+    
+    function isAdmin()
+    {
+    	if( isset($_SESSION['login']) ){
+    		 if( strcmp($_SESSION['login'] , "admin")==0 ) {
+    		 	return true;
+    		 }
+    	}
+    	return false;
     }
     
     // set up navigation
     $menu = Array();
     if( isset($_SESSION['login']) ) {
-	    if( $_SESSION['login'] == ("admin") ) {
+	    if( strcmp($_SESSION['login'] , "admin")==0 ) {
 	    	array_push($menu, array("url" => "index.php", "text" => "Startseite", "class" => "current"));
 		    array_push($menu, array("url" => "index.php", "text" => "Beitrag erstellen", "class" => ""));
 		    array_push($menu, array("url" => "index.php", "text" => "Alben verwalten", "class" => ""));
 		    array_push($menu, array("url" => "index.php?action=class", "text" => "Klassenverwaltung", "class" => ""));
 	    } else {
-	    	array_push($menu, array("url" => "index.php", "text" => "Alle", "class" => "current"));
-		    array_push($menu, array("url" => "index.php", "text" => "Deutsch", "class" => ""));
-		    array_push($menu, array("url" => "index.php", "text" => "Mathematik", "class" => ""));
-		    array_push($menu, array("url" => "index.php", "text" => "Sachunterricht", "class" => ""));
+	    	$subject = 0;
+	    	$bsubject = false;
+			if(isset($_GET["subject"])) {
+				$subject = $_GET["subject"];
+				$bsubject = true;
+			}
+	    	array_push($menu, array("url" => "index.php?action=show_posts", "text" => "Alle", "class" => $bsubject?"":"current"));
+	    	$classes = getSubjects();
+	    	while($row = $classes->fetch_object()) {
+				if($row->subjectID == $subject) {
+					$class = "current";
+				}
+				else {
+					$class = "";
+				}
+				array_push($menu, array("url" => "index.php?action=show_posts&subject=" . $row->subjectID , "text" => $row->name, "class" => $class));
+			}
 	    }
     } else {
     	array_push($menu, array("url" => "index.php", "text" => "Startseite", "class" => "current"));
