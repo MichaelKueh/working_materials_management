@@ -18,6 +18,11 @@
 		return $con->query("SELECT * FROM class");
 	}
 	
+	function getClassesWithoutAdmin() {
+		global $con;
+		return $con->query("SELECT * FROM class WHERE name != 'admin'");
+	}
+	
 	function updateClass($name, $login_key, $class) {
 		global $con;
 		$stmt = $con->prepare("UPDATE class SET name= ?, login_key= ? WHERE classID=?");
@@ -113,6 +118,49 @@
 		$stmt->close();
 		
 		return $result;
+	}
+	
+	function getPostById($id) {
+		global $con;
+		$stmt = $con->prepare("SELECT postID, title, content, classID FROM post WHERE postID = ?");
+		$stmt->bind_param('i',$id);
+		
+		$stmt->execute();
+		
+		$stmt->bind_result($postID, $title, $content, $classID);
+		$stmt->fetch();
+		$result = Array();
+		array_push($result, array("postID" => $postID, "title" => $title, "content" => $content, "classID" => $classID));
+		$stmt->close();
+				
+		return $result;
+	}
+	
+	function insertPost($title, $content, $active, $classID, $subjectID) {
+		global $con;
+		$stmt = $con->prepare("INSERT INTO post (title, content, active, classID, subjectID) VALUES (?, ?, ?, ?, ?);");
+		$stmt->bind_param('ssiii', $title, $content, $active, $classID, $subjectID);
+
+		$stmt->execute();
+		
+		$stmt->close();
+		
+		$temp = $con->query("SELECT max(postId) as postID FROM post")->fetch_object();
+		$postID = $temp->postID;
+		
+		return $postID;
+	}
+	
+	function insertFile($name, $type, $size, $content, $postID) {
+		global $con;
+		$stmt = $con->prepare("INSERT INTO file (name, type, size, content, postID) VALUES (?, ?, ?, ?, ?);");
+		$stmt->bind_param('ssisi', $name, $type, $size, $content, $postID);
+
+		$stmt->execute();
+		
+		echo $con->error;
+		
+		$stmt->close();
 	}
 	
 	function getComments($post) {

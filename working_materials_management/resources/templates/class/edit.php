@@ -11,14 +11,14 @@
 	    		$name = $blub["name"];
 	    		$login_key = $blub["login_key"];
 	    	}
-	    	$link = "index.php?action=update_class";
+	    	$link = "index.php?action=update&type=class";
 	    	
 	    }
 	    else {
 	    	$class = "";
 	    	$name = "";
 	    	$login_key = "";
-	    	$link = "index.php?action=insert_class";
+	    	$link = "index.php?action=insert&type=class";
 	    }
 	    
 	    echo "<form action = " . $link . " method='POST'>";
@@ -29,6 +29,4 @@
 		echo "</form>";
 	
 	}
-	else
-		require_once("content.php");
 ?>

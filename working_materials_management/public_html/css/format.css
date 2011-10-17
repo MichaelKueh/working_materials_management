@@ -90,6 +90,84 @@ div#content h1 {
 	font-family: monospace;
 }
 
-div#content p {
+div#content {
 	font-size: 11px;
+}
+
+div#content label {
+	display: inline-block;
+	min-width: 6em;
+}
+
+div#content div#nav {
+	text-align: center;
+}
+
+div#content div#nav a{
+	text-decoration: none;
+	color: navy;
+}
+
+div#content .post {
+	border: 1px solid #a7e54b; 
+	border-radius: 3px;
+	margin-top: 2em;
+	padding-bottom: 1em;
+}
+
+div#content .post_title {
+	font-weight: bold;
+	background-color: #a7e54b;
+	padding: 3px 10px;
+}
+
+div#content .post_content {
+	padding: 3px 10px;
+}
+
+div#content .post_title > .exit {
+	display: none;
+	float: right;
+}
+
+div#content .post_title:hover > .exit {
+	display: block;
+}
+
+div#content .post_comments {
+	padding-left: 30px;
+}
+
+div#content .comment {
+	margin: 10px 0px;
+	border: 1px solid #b6e570;
+	border-radius: 3px;
+}
+
+input.submit{
+	margin-left: 0.5em;
+	vertical-align: super;
+}
+
+div#content .comment:hover .exit {
+	display: block;
+}
+
+div#content .comment:hover .exit a{
+	text-decoration: none;
+}
+
+div#content .comment .exit {
+	float:right;
+	display: none;
+}
+
+div#content .post_comments .comment_name {
+	font-weight: bold;
+	background-color: #c5e595;
+	padding: 1px 3px;
+}
+
+div#content .post_comments .comment_text {
+	padding: 1px 3px;
 }
