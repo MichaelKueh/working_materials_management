@@ -19,3 +19,22 @@ function deleteComment(id) {
 	    }
 	});
 }
+
+function startOrderingPosts(){
+	$("#order_edit").toggle();
+	$("#order_submit").toggle();
+	$(".post_comments").slideUp(1000);
+	$("#sortable").sortable();
+	$(".post").css('cursor','move')
+}
+
+function submitOrderForm(){
+	var values = $(".order_input")
+
+	for(var i = 0; i< values.length; i++ )
+	{
+	    var temp = "<input type='hidden' value='" + $(".order_input:eq("+i+")").attr("data-value") + "' name='post[]'>";
+	    $("#order").append(temp);
+	}
+	 $("#order").submit();
+}

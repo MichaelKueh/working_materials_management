@@ -94,16 +94,25 @@
 		return $id;
 	}
 	
+	function updatePostIndex($post, $order) {
+		global $con;
+		$stmt = $con->prepare("UPDATE post SET position= ? WHERE postID=?;");
+		$stmt->bind_param('ii',$order,$post);
+		
+		$stmt->execute();
+		$stmt->close();
+	}
+	
 	function getPosts($subject, $class) {
 		global $con;
 		if(strcmp($subject, "*") == 0)
 		{
-			$stmt = $con->prepare("SELECT postID, title, content FROM post WHERE active = 1 AND classID = ? ORDER BY creationDate;");
+			$stmt = $con->prepare("SELECT postID, title, content FROM post WHERE active = 1 AND classID = ? ORDER BY position;");
 			$stmt->bind_param('i', $class);
 		}
 		else
 		{
-			$stmt = $con->prepare("SELECT postID, title, content FROM post WHERE active = 1 AND classID = ? AND subjectID = ? ORDER BY creationDate;");
+			$stmt = $con->prepare("SELECT postID, title, content FROM post WHERE active = 1 AND classID = ? AND subjectID = ? ORDER BY position;");
 			$stmt->bind_param('ii', $class,$subject);
 		}
 		

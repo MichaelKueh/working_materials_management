@@ -186,3 +186,8 @@ div#content table th {
 div#content table tr:nth-child(odd) td{
 	background-color: #e2ddff;
 }
+
+ul#sortable {
+	list-style-type:none;
+	padding:0px;
+}

@@ -69,7 +69,7 @@
 				$subject = $_GET["subject"];
 				$bsubject = true;
 			}
-	    	array_push($menu, array("url" => "index.php?action=show_posts", "text" => "Alle", "class" => $bsubject?"":"current"));
+	    	array_push($menu, array("url" => "index.php?action=post&type=post", "text" => "Alle", "class" => $bsubject?"":"current"));
 	    	$classes = getSubjects();
 	    	while($row = $classes->fetch_object()) {
 				if($row->subjectID == $subject) {
@@ -78,7 +78,7 @@
 				else {
 					$class = "";
 				}
-				array_push($menu, array("url" => "index.php?action=show_posts&subject=" . $row->subjectID , "text" => $row->name, "class" => $class));
+				array_push($menu, array("url" => "index.php?action=post&type=post&subject=" . $row->subjectID , "text" => $row->name, "class" => $class));
 			}
 	    }
     } else {
@@ -95,9 +95,10 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo STYLESHEET_PATH . "/layout.css" ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo STYLESHEET_PATH . "/format.css" ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo STYLESHEET_PATH . "/apprise.min.css" ?>" />
-		<script type="text/javascript" src="<?php echo JAVASCRIPT_PATH . "/main.js" ?>"> </script>
 		<script type="text/javascript" src="<?php echo JAVASCRIPT_PATH . "/apprise-1.5.min.js" ?>"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="<?php echo JAVASCRIPT_PATH . "/main.js" ?>"> </script>
 	</head>
 	<body>
 		<div id="container">
