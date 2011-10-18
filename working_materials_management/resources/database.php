@@ -122,15 +122,15 @@
 	
 	function getPostById($id) {
 		global $con;
-		$stmt = $con->prepare("SELECT postID, title, content, classID FROM post WHERE postID = ?");
+		$stmt = $con->prepare("SELECT postID, title, content, active, classID, subjectID FROM post WHERE postID = ?");
 		$stmt->bind_param('i',$id);
 		
 		$stmt->execute();
 		
-		$stmt->bind_result($postID, $title, $content, $classID);
+		$stmt->bind_result($postID, $title, $content, $active, $classID, $subjectID);
 		$stmt->fetch();
 		$result = Array();
-		array_push($result, array("postID" => $postID, "title" => $title, "content" => $content, "classID" => $classID));
+		array_push($result, array("postID" => $postID, "title" => $title, "content" => $content, "active" => $active, "classID" => $classID, "subjectID" => $subjectID));
 		$stmt->close();
 				
 		return $result;
@@ -150,6 +150,25 @@
 		
 		return $postID;
 	}
+
+	function updatePost($title, $content, $active, $classID, $subjectID, $postID) {
+		global $con;
+		$stmt = $con->prepare("UPDATE post SET title= ?, content= ?, active= ?, classID= ?, subjectID= ? WHERE postID=?");
+		$stmt->bind_param('ssiiii', $title, $content, $active, $classID, $subjectID, $postID);
+
+		$stmt->execute();
+		
+		$stmt->close();
+	}
+	
+	function deletePost($post) {
+		global $con;
+		$stmt = $con->prepare("DELETE FROM post WHERE postID = ?");
+		$stmt->bind_param('i',$post);
+		
+		$stmt->execute();
+		$stmt->close();
+	}
 	
 	function insertFile($name, $type, $size, $content, $postID) {
 		global $con;
@@ -158,23 +177,43 @@
 
 		$stmt->execute();
 		
+		$stmt->close();
+	}
+	
+	function insertImage($name, $type, $size, $content, $postID) {
+		global $con;
+		$stmt = $con->prepare("INSERT INTO image (name, type, size, content, postID) VALUES (?, ?, ?, ?, ?);");
+		$stmt->bind_param('ssisi', $name, $type, $size, $content, $postID);
+
 		echo $con->error;
+		$stmt->execute();
+		
+		$stmt->close();
+	}
+	
+	function insertLink($link, $postID) {
+		global $con;
+		$stmt = $con->prepare("INSERT INTO link (url, postID) VALUES (?, ?);");
+		$stmt->bind_param('si', $link, $postID);
+
+		echo $con->error;
+		$stmt->execute();
 		
 		$stmt->close();
 	}
 	
 	function getComments($post) {
 		global $con;
-		$stmt = $con->prepare("SELECT name, text FROM comment WHERE postID=? ORDER BY creationDate;");
+		$stmt = $con->prepare("SELECT commentID, name, text FROM comment WHERE postID=? ORDER BY creationDate;");
 		$stmt->bind_param('i', $post);
 		
 		$stmt->execute();
 		
-		$stmt->bind_result($name, $text);
+		$stmt->bind_result($commentID, $name, $text);
 		
 		$result = Array();
 		while ($stmt->fetch()) {
-			array_push($result, array("name" => $name, "text" => $text));
+			array_push($result, array("commentID" => $commentID, "name" => $name, "text" => $text));
    		}
 		$stmt->close();
 		
@@ -189,6 +228,15 @@
 		
 		$stmt->execute();
 		
+		$stmt->close();
+	}
+	
+	function deleteComment($comment) {
+		global $con;
+		$stmt = $con->prepare("DELETE FROM comment WHERE commentID = ?");
+		$stmt->bind_param('i',$comment);
+		
+		$stmt->execute();
 		$stmt->close();
 	}
 	  

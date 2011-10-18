@@ -25,11 +25,7 @@ body {
 
 /* -----------------Inhalt--------------------- */
 #content {
-	width: 556px;
 	padding: 10px;
-	padding-left: 20px;
-	margin-left: 0px;
-	margin-right: 200px;
 	background-color: #f9f9f9
 }
 div#content { 
@@ -37,15 +33,11 @@ div#content {
 	height:expression(this.scrollHeight > 600 ? "auto":"600px"); 
 }
 
-/* --------------right navigavtion------------- */
-#right {
-	float: right;
-	padding: 10px;
-	width: 200px;
-	max-width: 200px;
-	border-left: solid 4px #88ba3d;
-	min-height:600px;
-	background-color: #f9f9f9
+/* --------------login navigavtion------------- */
+#login {
+	text-align: right;
+	padding: 2px;
+	background-color: #88ba3d
 }
 
 /* -----------footer--------------------------- */

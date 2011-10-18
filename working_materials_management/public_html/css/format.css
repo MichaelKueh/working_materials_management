@@ -61,7 +61,7 @@ div#banner h1 {
 }
 
 div#banner class {
-	margin: -5px;
+	//margin: -5px;
 }
 
 /* ---------- footer -------------- */
@@ -71,17 +71,13 @@ div#footer {
 }
 
 /* ---------- right -------------- */
-div#right {
+div#login {
 	font-size: small;
 }
 
-div#right input{
-	margin-top: 5px;
-}
-
-div#right p.error {
+div#login div.error {
 	font-size: x-small;
-	color: red;
+	color: #8c0000;
 }
 
 /* ---------- content -------------- */
@@ -125,12 +121,13 @@ div#content .post_content {
 	padding: 3px 10px;
 }
 
-div#content .post_title > .exit {
+div#content .post .post_title > .exit {
 	display: none;
 	float: right;
+	margin-top: -3px;
 }
 
-div#content .post_title:hover > .exit {
+div#content .post:hover .post_title > .exit {
 	display: block;
 }
 
@@ -140,6 +137,7 @@ div#content .post_comments {
 
 div#content .comment {
 	margin: 10px 0px;
+	margin-right: 5px;
 	border: 1px solid #b6e570;
 	border-radius: 3px;
 }
@@ -170,4 +168,21 @@ div#content .post_comments .comment_name {
 
 div#content .post_comments .comment_text {
 	padding: 1px 3px;
+}
+
+div#content table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div#content table td {
+	padding: 5px;
+}
+
+div#content table th {
+	padding: 5px;
+}
+
+div#content table tr:nth-child(odd) td{
+	background-color: #e2ddff;
 }

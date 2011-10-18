@@ -1,35 +1,10 @@
-<script type="text/javascript">
-	function showFile() {
-		$("#file").slideDown();
-		$("#link").slideUp();
-		$("#album").slideUp();
-	}
-	
-	function showLink() {
-		$("#link").slideDown();
-		$("#file").slideUp();
-		$("#album").slideUp();
-	}
-	
-	function showAlbum() {
-		$("#album").slideDown();
-		$("#file").slideUp();
-		$("#link").slideUp();
-	}
-</script>
-	<div id='nav'>
-		<a href='#' onclick='showFile();'>Datei hochladen</a> |
-		<a href='#' onclick='showLink();'>Link teilen</a> |
-		<a href='#' onclick='showAlbum();'>Album ver&ouml;ffentlichen</a>
-	</div><br>
-
 <?php
 
 	if(isAdmin()){
 		if( isset($_GET["post"]) ) {
 	    	$post = $_GET["post"];
 	    	
-	    	$result = getPostId($post);
+	    	$result = getPostById($post);
 	    	
 	    	foreach ($result as $blub) {
 	    		$title = $blub["title"];
@@ -87,26 +62,19 @@
 		<label for='active'>Aktiv:</label>
 		<input type='checkbox' name='active' id='active' checked='checked'/><br><br>
 		
-		<div id="file" style="display:none;">
-			<label for="file">Datei:</label>
-			<input type="hidden" name="MAX_FILE_SIZE" value="2000000">
-			<input type="file" name="file" id="file">
-		</div>
-	
-		<div id="link" style="display:none;">
-			<label for="link">Link:</label>
-			<input type="text" name="link" id="link">
-		</div>
+		<label for="file">Dateien:</label>
+		<input type="file" name="file[]" multiple="multiple"><br><br>
+			
+		<label for="link">Links:</label>
+		<input type="text" name="link[]"><input type="button" onclick="$(this).after('<br><br><input type=\'text\' name=\'link[]\'/>');">
+		<br><br>
+			
+		<label for="album">Fotos:</label>
+		<input type="file" name="image[]" multiple="multiple"><br><br>
 		
-		<div id="album" style="display:none;">
-			<label for="album">Album:</label>
-			<input type="text" name="link" id="album">
-		</div>
-		
-		<br><br><input type='submit' value='Absenden'>
+		<br><br><br><input type='submit' value='Absenden'>
 		<input type='button' value='Abbrechen' onclick='history.back();'>
 		</form>
-		<script>showFile();</script>
 <?php
 	}
 ?>

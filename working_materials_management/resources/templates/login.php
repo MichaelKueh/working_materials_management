@@ -8,13 +8,13 @@
 		<input type="text" name="login_key" size="10" placeholder="Schl&uuml;ssel"/> 
 		<input type="submit" value="Anmelden"/>
 		
-		<p class="error">
+		<div class="error">
 			<?php
 				if( isset($wrongLogin) ) {
 					echo "unbekannter Schl&uuml;ssel eingegeben.";
 				}
 			?>
-		</p>
+		</div>
 	</form>
 	
 <?php

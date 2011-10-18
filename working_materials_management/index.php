@@ -27,6 +27,12 @@
     
     // define content
     if( isset($_GET["action"]) ) {
+    	
+    	if( $_GET["action"] == "logout") {
+    		unset($_SESSION['classId']);
+    		unset($_SESSION['login']);
+    	}
+    	
     	$content = $_GET["action"] . ".php";
     	if( isset($_GET["type"]) )
     		$content = $_GET["type"] . "/" . $content;
@@ -53,7 +59,7 @@
 	    	$_GET["type"] = isset($_GET["type"]) ? $_GET["type"] : "";
 	    	
 	    	array_push($menu, array("url" => "index.php", "text" => "Startseite", "class" => $_GET["type"] == "" ? "current" : ""));
-		    array_push($menu, array("url" => "index.php?action=post&type=post", "text" => "Beitrag erstellen", "class" => $_GET["type"] == "post" ? "current" : ""));
+		    array_push($menu, array("url" => "index.php?action=post&type=post", "text" => "Beitr&auml;ge verwalten", "class" => $_GET["type"] == "post" ? "current" : ""));
 		    array_push($menu, array("url" => "index.php", "text" => "Alben verwalten", "class" => ""));
 		    array_push($menu, array("url" => "index.php?action=class&type=class", "text" => "Klassenverwaltung", "class" => $_GET["type"] == "class" ? "current" : ""));
 	    } else {
@@ -88,6 +94,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" type="text/css" href="<?php echo STYLESHEET_PATH . "/layout.css" ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo STYLESHEET_PATH . "/format.css" ?>" />
+		<link rel="stylesheet" type="text/css" href="<?php echo STYLESHEET_PATH . "/apprise.min.css" ?>" />
+		<script type="text/javascript" src="<?php echo JAVASCRIPT_PATH . "/main.js" ?>"> </script>
+		<script type="text/javascript" src="<?php echo JAVASCRIPT_PATH . "/apprise-1.5.min.js" ?>"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
 	</head>
 	<body>
@@ -95,8 +104,8 @@
 			<div id="banner">
 				<?php require_once(TEMPLATES_PATH . "/banner.php"); ?>
 			</div>
-			<div id="right">
-				<?php require_once(TEMPLATES_PATH . "/right.php"); ?>
+			<div id="login">
+				<?php require_once(TEMPLATES_PATH . "/login.php"); ?>
 			</div>
 			<div id="content">
 				<?php require_once(TEMPLATES_PATH . "/" . $content); ?>

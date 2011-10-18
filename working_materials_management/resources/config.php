@@ -25,7 +25,10 @@
 	    or define("TEMPLATES_PATH", realpath(dirname(__FILE__) . '/templates'));
 	    
 	defined("STYLESHEET_PATH")  
-	    or define("STYLESHEET_PATH", "/public_html/css");  
+	    or define("STYLESHEET_PATH", "/public_html/css");
+	    
+	defined("JAVASCRIPT_PATH")  
+	    or define("JAVASCRIPT_PATH", "/public_html/js");    
 	  
 	/* 
 	    Error reporting. 
