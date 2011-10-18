@@ -1,6 +1,4 @@
 <?php
-	 // load up config file  
-    require_once("resources/config.php");
     
 	$con = new mysqli($config["db"]["host"],$config["db"]["username"],$config["db"]["password"]);
 	if (mysqli_connect_errno())
@@ -198,6 +196,25 @@
 		$stmt->execute();
 		
 		$stmt->close();
+	}
+	
+	function getImageById($image) {
+		global $con;
+		$stmt = $con->prepare("SELECT name, type, size, content FROM image WHERE imageID = ?;");
+		$stmt->bind_param('i', $image);
+		
+		$stmt->execute();
+		
+		$stmt->bind_result($name, $type, $size, $content);
+		
+		$result = Array();
+		while ($stmt->fetch()) {
+			
+			array_push($result, array("name" => $name, "type" => $type, "size" => $size, "content" => $content));
+		}
+		$stmt->close();
+		
+		return $result;
 	}
 	
 	function insertLink($link, $postID) {
