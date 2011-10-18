@@ -1,15 +1,5 @@
 <?php
 	if(isAdmin()){
-		echo "POST:";
-		print_r($_POST);
-		echo "<br>GET:";
-		print_r($_GET);
-		echo "<br>FILES:";
-		print_r($_FILES);
-		echo isset($_POST["title"]);
-		echo isset($_POST["content"]);
-		echo isset($_POST["classID"]);
-		echo isset($_POST["subjectID"]);
 		
 		if( isset($_POST["title"]) && isset($_POST["content"]) && isset($_POST["classID"]) && isset($_POST["subjectID"]) ) {
 			$title = $_POST["title"];
@@ -62,6 +52,6 @@
 			}	
 	    }
 	    
-		//require_once(TEMPLATES_PATH . "/post/post.php");
+		require_once(TEMPLATES_PATH . "/post/post.php");
     }
 ?>
