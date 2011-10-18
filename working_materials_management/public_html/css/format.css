@@ -131,6 +131,14 @@ div#content .post:hover .post_title > .exit {
 	display: block;
 }
 
+div#content .post_files, div#content .post_links, div#content .post_images {
+	padding-left: 30px;
+}
+
+div#content h2 {
+	font-size: 11px;
+}
+
 div#content .post_comments {
 	padding-left: 30px;
 }

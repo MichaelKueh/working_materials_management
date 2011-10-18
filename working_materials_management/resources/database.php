@@ -187,12 +187,30 @@
 		$stmt->close();
 	}
 	
+	function getFilesByPostId($id) {
+		global $con;
+		$stmt = $con->prepare("SELECT fileID, name, type, size, content FROM file WHERE postID = ?");
+		$stmt->bind_param('i',$id);
+		
+		$stmt->execute();
+		$stmt->bind_result($fileID, $name, $type, $size, $content);
+		$result = Array();
+		
+		while( $stmt->fetch() ) {
+			array_push($result, array("fileID" => $fileID, "name" => $name, "type" => $type, "size" => $size, "content" => $content));
+		}
+		$stmt->close();
+				
+		return $result;
+	}
+	
 	function insertImage($name, $type, $size, $content, $postID) {
 		global $con;
+		echo $con->error;
 		$stmt = $con->prepare("INSERT INTO image (name, type, size, content, postID) VALUES (?, ?, ?, ?, ?);");
+		echo $con->error;
 		$stmt->bind_param('ssisi', $name, $type, $size, $content, $postID);
 
-		echo $con->error;
 		$stmt->execute();
 		
 		$stmt->close();
@@ -217,15 +235,48 @@
 		return $result;
 	}
 	
-	function insertLink($link, $postID) {
+	function getImagesByPostId($id) {
 		global $con;
-		$stmt = $con->prepare("INSERT INTO link (url, postID) VALUES (?, ?);");
-		$stmt->bind_param('si', $link, $postID);
+		$stmt = $con->prepare("SELECT imageID, name, type, size, content FROM image WHERE postID = ?");
+		$stmt->bind_param('i',$id);
+		
+		$stmt->execute();
+		$stmt->bind_result($imageID, $name, $type, $size, $content);
+		$result = Array();
+		
+		while( $stmt->fetch() ) {
+			array_push($result, array("imageID" => $imageID, "name" => $name, "type" => $type, "size" => $size, "content" => $content));
+		}
+		$stmt->close();
+				
+		return $result;
+	}
+	
+	function insertLink($link, $name, $postID) {
+		global $con;
+		$stmt = $con->prepare("INSERT INTO link (url, name, postID) VALUES (?, ?, ?);");
+		$stmt->bind_param('ssi', $link, $name, $postID);
 
-		echo $con->error;
 		$stmt->execute();
 		
 		$stmt->close();
+	}
+	
+	function getLinksByPostId($id) {
+		global $con;
+		$stmt = $con->prepare("SELECT linkID, name, url FROM link WHERE postID = ?");
+		$stmt->bind_param('i',$id);
+		
+		$stmt->execute();
+		$stmt->bind_result($linkID, $name, $url);
+		$result = Array();
+		
+		while( $stmt->fetch() ) {
+			array_push($result, array("linkID" => $linkID, "name" => $name, "url" => $url));
+		}
+		$stmt->close();
+				
+		return $result;
 	}
 	
 	function getComments($post) {
