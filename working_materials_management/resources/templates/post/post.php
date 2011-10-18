@@ -1,4 +1,7 @@
 <?php
+
+	echo "<script>Galleria.loadTheme('resources/library/galleria/themes/classic/galleria.classic.min.js');</script>";
+	
 	if( isset($_GET["classID"]) ) {
 		$_SESSION['classId'] = $_GET["classID"];
 	}
@@ -86,20 +89,21 @@
 	    			echo "</ul>";
     			}
     		echo "</div>";
-    		
+    		echo "<br>";
     		echo "<div class='post_images'>";
     			$images = getImagesByPostId($post["postID"]);
     			if( count($images) > 0 ) {
-    				echo "<h2>Bilder:</h2>";
-	    			echo "<ul>";
-	    			foreach($images as $image) {
-	    				echo "<li>" . $image["name"] . "</li>";
-	    			}
-	    			echo "</ul>";
+    				foreach($images as $image) {
+    					echo "<img src='resources/templates/post/get_image.php?imageID=". $image["imageID"] . "'/>";
+    				}
+    				echo "<script>";
+						echo "$('#post_" . $post["postID"] . " .post_images').galleria({width: 700, height: 300});";
+						echo "console.log($(this));";
+					echo "</script>";
     			}
     		echo "</div>";
     		
-    		echo "<div class='post_comments'>";
+    		echo "<br><div class='post_comments'>";
 	    		$comments = getComments($post["postID"]);
 	    		foreach ($comments as $comment) {
 	    			$comment["name"] = strlen($comment["name"]) == 0 ?  "kein Name angegeben" : $comment["name"];

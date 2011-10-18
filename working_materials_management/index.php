@@ -99,6 +99,7 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="<?php echo JAVASCRIPT_PATH . "/main.js" ?>"> </script>
+		<script type="text/javascript" src="<?php echo "resources/library/galleria/galleria-1.2.5.min.js" ?>"> </script>
 	</head>
 	<body>
 		<div id="container">

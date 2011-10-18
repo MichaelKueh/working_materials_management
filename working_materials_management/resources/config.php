@@ -29,6 +29,9 @@
 	    
 	defined("JAVASCRIPT_PATH")  
 	    or define("JAVASCRIPT_PATH", "/public_html/js");    
+	
+	defined("LIBRARY_PATH")  
+	    or define("LIBRARY_PATH", "/resources/library");
 	  
 	/* 
 	    Error reporting. 

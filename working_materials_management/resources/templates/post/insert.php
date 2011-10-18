@@ -1,6 +1,16 @@
 <?php
-
 	if(isAdmin()){
+		echo "POST:";
+		print_r($_POST);
+		echo "<br>GET:";
+		print_r($_GET);
+		echo "<br>FILES:";
+		print_r($_FILES);
+		echo isset($_POST["title"]);
+		echo isset($_POST["content"]);
+		echo isset($_POST["classID"]);
+		echo isset($_POST["subjectID"]);
+		
 		if( isset($_POST["title"]) && isset($_POST["content"]) && isset($_POST["classID"]) && isset($_POST["subjectID"]) ) {
 			$title = $_POST["title"];
 			$content = $_POST["content"];
@@ -31,7 +41,8 @@
 					insertLink($_POST["link"][$i], $_POST["name"][$i], $postID);
 				}
 			}
-			
+			echo "asdfasf";
+			print_r($_FILES["image"]);
 			if( strlen($_FILES["image"]["name"][0]) != 0 ){
 				for($i = 0; $i < count($_FILES["image"]["name"]); $i++) {
 					$name = $_FILES["image"]["name"][$i];
@@ -44,11 +55,13 @@
 					$content = fread($fp, filesize($tmpName));
 					fclose($fp);
 					
+					echo $name;
+					
 					insertImage($name, $type, $size, $content, $postID);
 				}
 			}	
 	    }
 	    
-		require_once(TEMPLATES_PATH . "/post/post.php");
+		//require_once(TEMPLATES_PATH . "/post/post.php");
     }
 ?>
