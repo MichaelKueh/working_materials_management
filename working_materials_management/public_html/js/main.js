@@ -19,3 +19,9 @@ function deleteComment(id) {
 	    }
 	});
 }
+
+function addLink() {
+	
+	$("[name='link[]']:last").after("<br><label></label> <input type='text' name='name[]' placeholder='Name'> <input type='text' name='link[]' placeholder='Adresse'>");
+	
+}

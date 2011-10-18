@@ -66,7 +66,9 @@
 		<input type="file" name="file[]" multiple="multiple"><br><br>
 			
 		<label for="link">Links:</label>
-		<input type="text" name="link[]"><input type="button" onclick="$(this).after('<br><br><input type=\'text\' name=\'link[]\'/>');">
+		<input type="text" name="name[]" placeholder="Name">
+		<input type="text" name="link[]" placeholder="Adresse">
+		<input type="button" onclick="addLink();" value="weiteren Link speichern">
 		<br><br>
 			
 		<label for="album">Fotos:</label>

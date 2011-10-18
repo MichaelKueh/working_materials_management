@@ -48,6 +48,48 @@
     		echo "<div class='post' id='post_" . $post["postID"] . "'>";
     		echo "<div class='post_title'>" . $post["title"] . "<div class='exit'>" . $delete . "</div>" . "</div>";
     		echo "<div class='post_content'>" . $post["content"] . "</div>";
+    		
+    		echo "<div class='post_files'>";
+    			$files = getFilesByPostId($post["postID"]);
+    			if( count($files) > 0 ) {
+    				echo "<h2>Dateien:</h2>";
+	    			echo "<ul>";
+	    			foreach($files as $file) {
+	    				echo "<li>";
+	    					echo "<a href='index.php?action=getFile&fileID=" .  $file["fileID"] . "'>" . $file["name"] . "</a>";
+	    					echo " (" . round($file["size"] / 1024, 1) . " kB )";
+						echo "</li>";
+	    			}
+	    			echo "</ul>";
+    			}
+    		echo "</div>";
+    		
+    		echo "<div class='post_links'>";
+    			$links = getLinksByPostId($post["postID"]);
+    			if( count($links) > 0 ) {
+    				echo "<h2>Links:</h2>";
+	    			echo "<ul>";
+	    			foreach($links as $link) {
+	    				echo "<li>";
+	    					echo "<a href='" .  $link["url"] . "' target='_blank'>" . $link["name"] . "</a>"; 
+						echo "</li>";
+	    			}
+	    			echo "</ul>";
+    			}
+    		echo "</div>";
+    		
+    		echo "<div class='post_images'>";
+    			$images = getImagesByPostId($post["postID"]);
+    			if( count($images) > 0 ) {
+    				echo "<h2>Bilder:</h2>";
+	    			echo "<ul>";
+	    			foreach($images as $image) {
+	    				echo "<li>" . $image["name"] . "</li>";
+	    			}
+	    			echo "</ul>";
+    			}
+    		echo "</div>";
+    		
     		echo "<div class='post_comments'>";
 	    		$comments = getComments($post["postID"]);
 	    		foreach ($comments as $comment) {

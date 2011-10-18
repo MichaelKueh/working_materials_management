@@ -33,8 +33,8 @@
 			}
 			
 			if( strlen($_POST["link"][0]) != 0 ){
-				foreach( $_POST["link"] as $link) {
-					insertLink($link, $postID);
+				for($i = 0; $i < count($_POST["link"]); $i++) {
+					insertLink($_POST["link"][$i], $_POST["name"][$i], $postID);
 				}
 			}
 			
