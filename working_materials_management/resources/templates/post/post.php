@@ -6,7 +6,10 @@
 		$_SESSION['classId'] = $_GET["classID"];
 	}
 	
+	$filterNonActiveAll = true;
+	
 	if( isAdmin() ) {
+		$filterNonActive = false;
 ?>
 
 		<form action="index.php?action=post&type=post" 	method="get">
@@ -44,7 +47,7 @@
     
     
     if( isset($_SESSION['classId']) ) {
-    	$posts = getPosts($subject,$_SESSION['classId']);
+    	$posts = getPosts($subject,$_SESSION['classId'], $filterNonActiveAll);
     	
     	echo "<ul id='sortable'>";
     	foreach ($posts as $post) {
