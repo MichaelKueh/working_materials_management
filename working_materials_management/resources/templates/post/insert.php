@@ -20,13 +20,7 @@
 					
 					$fp      = fopen($tmpName, 'r');
 					$content = fread($fp, filesize($tmpName));
-					$content = addslashes($content);
 					fclose($fp);
-					
-					if(!get_magic_quotes_gpc())
-					{
-					    $name = addslashes($name);
-					}
 					
 					insertFile($name, $type, $size, $content, $postID);
 				}
@@ -48,13 +42,7 @@
 					
 					$fp      = fopen($tmpName, 'r');
 					$content = fread($fp, filesize($tmpName));
-					$content = addslashes($content);
 					fclose($fp);
-					
-					if(!get_magic_quotes_gpc())
-					{
-					    $name = addslashes($name);
-					}
 					
 					insertImage($name, $type, $size, $content, $postID);
 				}
