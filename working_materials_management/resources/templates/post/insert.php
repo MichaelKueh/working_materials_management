@@ -31,8 +31,6 @@
 					insertLink($_POST["link"][$i], $_POST["name"][$i], $postID);
 				}
 			}
-			echo "asdfasf";
-			print_r($_FILES["image"]);
 			if( strlen($_FILES["image"]["name"][0]) != 0 ){
 				for($i = 0; $i < count($_FILES["image"]["name"]); $i++) {
 					$name = $_FILES["image"]["name"][$i];
@@ -44,8 +42,6 @@
 					$fp      = fopen($tmpName, 'r');
 					$content = fread($fp, filesize($tmpName));
 					fclose($fp);
-					
-					echo $name;
 					
 					insertImage($name, $type, $size, $content, $postID);
 				}
