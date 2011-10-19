@@ -60,7 +60,7 @@
 		</select><br><br>
 		
 		<label for='active'>Aktiv:</label>
-		<input type='checkbox' name='active' id='active' checked='checked'/><br><br>
+		<input type='checkbox' name='active' id='active' <?php if($active) echo "checked='checked'"?>/><br><br>
 		
 		<label for="file">Dateien:</label>
 		<input type="file" name="file[]" multiple="multiple"><br><br>

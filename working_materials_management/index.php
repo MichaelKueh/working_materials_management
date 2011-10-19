@@ -60,7 +60,6 @@
 	    	
 	    	array_push($menu, array("url" => "index.php", "text" => "Startseite", "class" => $_GET["type"] == "" ? "current" : ""));
 		    array_push($menu, array("url" => "index.php?action=post&type=post", "text" => "Beitr&auml;ge verwalten", "class" => $_GET["type"] == "post" ? "current" : ""));
-		    array_push($menu, array("url" => "index.php", "text" => "Alben verwalten", "class" => ""));
 		    array_push($menu, array("url" => "index.php?action=class&type=class", "text" => "Klassenverwaltung", "class" => $_GET["type"] == "class" ? "current" : ""));
 	    } else {
 	    	$subject = 0;

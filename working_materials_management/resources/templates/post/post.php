@@ -82,6 +82,9 @@
     				echo "<h2>Links:</h2>";
 	    			echo "<ul>";
 	    			foreach($links as $link) {
+	    				if( !(strpos($link["url"],"http") === 0) ) {
+	    					$link["url"] = "http://" . $link["url"];
+	    				}
 	    				echo "<li>";
 	    					echo "<a href='" .  $link["url"] . "' target='_blank'>" . $link["name"] . "</a>"; 
 						echo "</li>";
