@@ -101,17 +101,17 @@
 		$stmt->close();
 	}
 	
-	function getPosts($subject, $class) {
+	function getPosts($subject, $class, $filterNonActive) {
 		global $con;
 		if(strcmp($subject, "*") == 0)
 		{
-			$stmt = $con->prepare("SELECT postID, title, content FROM post WHERE active = 1 AND classID = ? ORDER BY position;");
-			$stmt->bind_param('i', $class);
+			$stmt = $con->prepare("SELECT postID, title, content FROM post WHERE (active = true OR active = ? ) AND classID = ? ORDER BY position, creationDate DESC;");
+			$stmt->bind_param('ii', $filterNonActive, $class);
 		}
 		else
 		{
-			$stmt = $con->prepare("SELECT postID, title, content FROM post WHERE active = 1 AND classID = ? AND subjectID = ? ORDER BY position;");
-			$stmt->bind_param('ii', $class,$subject);
+			$stmt = $con->prepare("SELECT postID, title, content FROM post WHERE (active = true OR active = ? ) AND classID = ? AND subjectID = ? ORDER BY position, creationDate DESC;");
+			$stmt->bind_param('iii', $filterNonActive, $class,$subject);
 		}
 		
 		
@@ -145,7 +145,7 @@
 	
 	function insertPost($title, $content, $active, $classID, $subjectID) {
 		global $con;
-		$stmt = $con->prepare("INSERT INTO post (title, content, active, classID, subjectID) VALUES (?, ?, ?, ?, ?);");
+		$stmt = $con->prepare("INSERT INTO post (title, content, active, classID, subjectID, position) VALUES (?, ?, ?, ?, ?, 0);");
 		$stmt->bind_param('ssiii', $title, $content, $active, $classID, $subjectID);
 
 		$stmt->execute();
@@ -293,6 +293,33 @@
 		global $con;
 		$stmt = $con->prepare("DELETE FROM comment WHERE commentID = ?");
 		$stmt->bind_param('i',$comment);
+		
+		$stmt->execute();
+		$stmt->close();
+	}
+	
+	function deleteLink($link) {
+		global $con;
+		$stmt = $con->prepare("DELETE FROM link WHERE linkID = ?");
+		$stmt->bind_param('i',$link);
+		
+		$stmt->execute();
+		$stmt->close();
+	}
+	
+	function deleteFile($file) {
+		global $con;
+		$stmt = $con->prepare("DELETE FROM file WHERE fileID = ?");
+		$stmt->bind_param('i',$file);
+		
+		$stmt->execute();
+		$stmt->close();
+	}
+	
+	function deleteImage($image) {
+		global $con;
+		$stmt = $con->prepare("DELETE FROM image WHERE imageID = ?");
+		$stmt->bind_param('i',$image);
 		
 		$stmt->execute();
 		$stmt->close();
