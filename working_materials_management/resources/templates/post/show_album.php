@@ -15,3 +15,6 @@
 		<? } ?>
     </div>	
 <?php } ?>
+
+<br />
+<a href="#" onclick="history.back();">zur&uuml;ck zur &Uuml;bersicht</a>
