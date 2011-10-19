@@ -20,7 +20,7 @@
 	    	$post = "";
 	    	$title = "";
 	    	$content = "";
-	    	$active = "";
+	    	$active = 1;
 	    	$classID = "";
 	    	$subjectID = "";
 	    	$link = "index.php?action=insert&type=post";
@@ -102,6 +102,9 @@
 	    				echo "<li id=link_". $link["linkID"] .">";
 	    					echo "<div>";
 		    					echo "<div  style='min-width:25em; display:inline-block;'>";
+			    					if( !(strpos($link["url"],"http") === 0) ) {
+				    					$link["url"] = "http://" . $link["url"];
+				    				}
 		    						echo "<a href='" .  $link["url"] . "' target='_blank'>" . $link["name"] . "</a>";
 		    					echo "</div>";
 		    					echo "<div style='display:inline-block;'>";

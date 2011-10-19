@@ -10,8 +10,6 @@
 			
 			updatePost($title, $content, $active, $classID, $subjectID, $postID);
 			
-			print_r($_FILES);
-			
 			if( strlen($_FILES["file"]["name"][0]) != 0 ){
 				for($i = 0; $i < count($_FILES["file"]["name"]); $i++) {
 					$name = $_FILES["file"]["name"][$i];

@@ -1,9 +1,8 @@
-<?php
-
-	echo "<script>Galleria.loadTheme('resources/library/galleria/themes/classic/galleria.classic.min.js');</script>";
-	
+<?php	
 	if( isset($_GET["classID"]) ) {
 		$_SESSION['classId'] = $_GET["classID"];
+	} else {
+		$_SESSION['classId'] = getClassesWithoutAdmin()->fetch_object()->classID;
 	}
 	
 	$filterNonActive = true;

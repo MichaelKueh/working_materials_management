@@ -17,4 +17,4 @@
 <?php } ?>
 
 <br />
-<a href="#" onclick="history.back();">zur&uuml;ck zur &Uuml;bersicht</a>
+<a href="index.php?action=post&type=post"">zur&uuml;ck zur &Uuml;bersicht</a>
