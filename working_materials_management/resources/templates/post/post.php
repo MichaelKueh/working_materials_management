@@ -71,7 +71,7 @@
 	    			echo "<ul>";
 	    			foreach($files as $file) {
 	    				echo "<li>";
-	    					echo "<a href='index.php?action=getFile&fileID=" .  $file["fileID"] . "'>" . $file["name"] . "</a>";
+	    					echo "<a href='resources/templates/post/get_file.php?fileID=" .  $file["fileID"] . "'>" . $file["name"] . "</a>";
 	    					echo " (" . round($file["size"] / 1024, 1) . " kB )";
 						echo "</li>";
 	    			}
@@ -85,6 +85,9 @@
     				echo "<h2>Links:</h2>";
 	    			echo "<ul>";
 	    			foreach($links as $link) {
+	    				if( !(strpos($link["url"],"http") === 0) ) {
+	    					$link["url"] = "http://" . $link["url"];
+	    				}
 	    				echo "<li>";
 	    					echo "<a href='" .  $link["url"] . "' target='_blank'>" . $link["name"] . "</a>"; 
 						echo "</li>";
