@@ -99,14 +99,10 @@
     		echo "<div class='post_images'>";
     			$images = getImagesByPostId($post["postID"]);
     			if( count($images) > 0 ) {
-    				foreach($images as $image) {
-    					echo "<img src='resources/templates/post/get_image.php?imageID=". $image["imageID"] . "'/>";
-    				}
-    				echo "<script>";
-						echo "$('#post_" . $post["postID"] . " .post_images').galleria({width: 700, height: 300});";
-						echo "console.log($(this));";
-					echo "</script>";
-    			}
+    				$image = $images[0];
+    					echo "<img src='resources/templates/post/get_image.php?imageID=". $image["imageID"] . "' style='max-width: 300px'/> ";
+    					echo "<a href='index.php?action=show_album&type=post&postID=" . $post["postID"] . "'>Alle Bilder ansehen...</a>";
+      			}
     		echo "</div>";
     		
     		echo "<br><div class='post_comments'>";
